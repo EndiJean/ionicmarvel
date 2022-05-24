@@ -19,6 +19,9 @@ export class ServiceService {
     let ts = this.generateTS();
 
     return new Promise((ret) => {
+      this.getKeys().then(_ => {
+        
+     
       this.http.get(this.host + url + '?ts=' + ts + '&aplikey=' + this.publicKey + '&hash' + this.getHash(ts) + parameters).subscribe((response) => {
 
         if (response) {
@@ -26,8 +29,9 @@ export class ServiceService {
 
         } else {
           ret(false);
-        }
+        } 
       })
+    })
     })
 
   }

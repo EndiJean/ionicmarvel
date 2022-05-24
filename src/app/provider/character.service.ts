@@ -31,6 +31,10 @@ export class CharacterService {
     filter: string){
       let strFilter = '';
 
+      if(filter){
+        strFilter = '&nameStarWith=' + filter;
+      }
+
       let param = '&limit=' + pagination.getLimit() + '&offset' + pagination.getOffset() + strFilter;
 
       return new Promise((ret) => {

@@ -35,7 +35,7 @@ export class HomePage {
       this.pagination.reset();
     }
 
-    this.characterServices.getAllCharecters(this.pagination, "").then((characters:any) => {
+    this.characterServices.getAllCharecters(this.pagination, this.filtro.descricao).then((characters:any) => {
       console.log(characters)
       this.filtro.bkp = this.filtro.descricao;
       this.characters = [];
