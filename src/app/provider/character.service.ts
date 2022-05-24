@@ -11,7 +11,7 @@ export class CharacterService {
 
   public getCharecterById(id: number){
     return new Promise((ret) => {
-      this.service.getDados('/v1/public/characters/' + id, '')
+      this.service.getDados('v1/public/characters/' + id, '')
       .then((data: any) => {
 
           if(data && data.data && data.data.results){
@@ -38,7 +38,7 @@ export class CharacterService {
       let param = '&limit=' + pagination.getLimit() + '&offset' + pagination.getOffset() + strFilter;
 
       return new Promise((ret) => {
-        this.service.getDados('/v1/public/characters',  param).then((data:any) => {
+        this.service.getDados('v1/public/characters',  param).then((data:any) => {
           if(data && data.data && data.data.results){
             this.updatePagination(pagination, data.data);
             ret(data.data.results);
