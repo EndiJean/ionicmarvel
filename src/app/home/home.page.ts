@@ -11,12 +11,14 @@ import { PaginationComponent } from '../util/pagination/pagination.component';
 })
 export class HomePage {
 
+  public characters = [];
+
   public filtro = {
     descricao: '',
     bkp: ''
   }
 
-  public characters = [];
+  
   public pagination = new PaginationComponent();
   public checking = true;
 
@@ -35,7 +37,7 @@ export class HomePage {
       this.pagination.reset();
     }
 
-    this.characterServices.getAllCharecters(this.pagination, this.filtro.descricao).then((characters:any) => {
+    this.characterServices.getAllCharacters(this.pagination, this.filtro.descricao).then((characters:any) => {
       console.log(characters)
       this.filtro.bkp = this.filtro.descricao;
       this.characters = [];
@@ -52,7 +54,6 @@ export class HomePage {
 
   }
 
-    /* métodos relacionados à paginação */
     public goFirstPage(){
       this.pagination.setCurrentPage(1);
       this.getAllCharacters();
@@ -77,6 +78,4 @@ export class HomePage {
       this.pagination.setCurrentPage(page);
       this.getAllCharacters();
   }
-  /* --- */
-    
 }

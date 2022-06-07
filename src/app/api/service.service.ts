@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Md5 } from 'ts-md5/dist/md5';
+import {Md5} from 'ts-md5/dist/md5';
 
 
 @Injectable({
@@ -8,35 +8,32 @@ import { Md5 } from 'ts-md5/dist/md5';
 })
 export class ServiceService {
 
-  private publicKey = "";
-  private privateKey = "";
-
-  private host = "http://getway.marvel.com/"
+  private publicKey  = '';
+  private privateKey = '';
+  
+  private host = 'http://gateway.marvel.com/';
 
   constructor(private http: HttpClient) { }
 
-  public getDados(url: String, parameters: String) {
-    let ts = this.generateTS();
-
+  getDados(url:string, parameters:string){
+    let ts = this.generateTs();
+    
     return new Promise((ret) => {
       this.getKeys().then(_ => {
-        
-     
-      this.http.get(this.host + url + '?ts=' + ts + '&aplikey=' + this.publicKey + '&hash' + this.getHash(ts) + parameters).subscribe((response) => {
-
-        if (response) {
-          ret(response);
-
-        } else {
+        this.http.get(this.host + url + '?ts=' + ts + '&apikey=' + this.publicKey + '&hash=' + this.getHash(ts) + parameters).subscribe((response) => {
+          if(response){
+              ret(response);
+          } else {
+              ret(false);
+          }
+        }, (erro) => {
           ret(false);
-        } 
-      })
-    })
-    })
-
+        });
+      });
+    });
   }
 
-  private generateTS(){
+  private generateTs(){
     return Math.floor(100000 + Math.random() * 900000);
   }
 
@@ -46,7 +43,7 @@ export class ServiceService {
 
   private getKeys(){
     return new Promise((ret) => {
-      this.http.get('assets/Keys.json').subscribe((keys:any) => {
+      this.http.get('assets/keys.json').subscribe((keys:any) => {
         this.publicKey = keys.public;
         this.privateKey = keys.private;
 

@@ -53,7 +53,7 @@
           <ion-row class="white-frame-list ion-align-items-center">
             <ion-col size="4" size-md="1" class="col-character">
               <ion-row class="ion-align-items-center">
-                <imag *ngIf="character.thumbnail && character.thumbnail.path" [src]="character.thumbnail.path + '.' + character.thumbnail.extends" [alt]="character.name" class="character-img"> </imag>
+                <img *ngIf="character.thumbnail && character.thumbnail.path" [src]="character.thumbnail.path + '.' + character.thumbnail.extension" [alt]="character.name" class="character-img">
               </ion-row>
             </ion-col>
             <ion-col size="8" size-md="3" class="col-character">

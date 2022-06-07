@@ -9,7 +9,7 @@ export class CharacterService {
 
   constructor(private service: ServiceService) { }
 
-  public getCharecterById(id: number){
+  public getCharacterById(id: number){
     return new Promise((ret) => {
       this.service.getDados('v1/public/characters/' + id, '')
       .then((data: any) => {
@@ -26,21 +26,21 @@ export class CharacterService {
     })
   }
 
-  public getAllCharecters(
-    pagination: PaginationComponent,
-    filter: string){
+  public getAllCharacters(pagination: PaginationComponent,filter: string){
       let strFilter = '';
 
       if(filter){
-        strFilter = '&nameStarWith=' + filter;
+        strFilter = '&nameStartsWith=' + filter;
       }
 
-      let param = '&limit=' + pagination.getLimit() + '&offset' + pagination.getOffset() + strFilter;
+      let param = '&limit=' + pagination.getLimit() + '&offset=' + pagination.getOffset() + strFilter;
 
       return new Promise((ret) => {
         this.service.getDados('v1/public/characters',  param).then((data:any) => {
+          
           if(data && data.data && data.data.results){
             this.updatePagination(pagination, data.data);
+            
             ret(data.data.results);
 
           } else {
@@ -51,14 +51,16 @@ export class CharacterService {
       })
     }
 
-    public getComicsByCharacter(id: number){
+    public getComicsByCharacter(character: any){
       return new Promise((ret) => {
-        this.service.getDados('/v1/public/characters/' + id + '/comics', '').then((data:any) => {
+        this.service.getDados('v1/public/characters/' + character.id + '/comics', '').then((data:any) => {
           if(data && data.data && data.data.results){
             ret(data.data.results);
+         
           } else {
             ret([]);
           }
+
         })
 
       })
