@@ -22,8 +22,8 @@ export class CharacterService {
             ret([]);
 
           }
-      })
-    })
+      });
+    });
   }
 
   public getAllCharacters(pagination: PaginationComponent,filter: string){
@@ -36,34 +36,34 @@ export class CharacterService {
       let param = '&limit=' + pagination.getLimit() + '&offset=' + pagination.getOffset() + strFilter;
 
       return new Promise((ret) => {
-        this.service.getDados('v1/public/characters',  param).then((data:any) => {
-          
+        this.service.getDados('v1/public/characters',  param).then((data: any) => {
+
           if(data && data.data && data.data.results){
             this.updatePagination(pagination, data.data);
-            
+
             ret(data.data.results);
 
           } else {
             ret([]);
-               
+
           }
-        })
-      })
+        });
+      });
     }
 
     public getComicsByCharacter(character: any){
       return new Promise((ret) => {
-        this.service.getDados('v1/public/characters/' + character.id + '/comics', '').then((data:any) => {
+        this.service.getDados('v1/public/characters/' + character.id + '/comics', '').then((data: any) => {
           if(data && data.data && data.data.results){
             ret(data.data.results);
-         
+
           } else {
             ret([]);
           }
 
-        })
+        });
 
-      })
+      });
     }
 
   /* atualiza as informações de paginação */

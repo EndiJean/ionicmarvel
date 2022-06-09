@@ -10,14 +10,14 @@ export class ServiceService {
 
   private publicKey  = '';
   private privateKey = '';
-  
+
   private host = 'http://gateway.marvel.com/';
 
   constructor(private http: HttpClient) { }
 
-  getDados(url:string, parameters:string){
+  getDados(url: string, parameters: string){
     let ts = this.generateTs();
-    
+
     return new Promise((ret) => {
       this.getKeys().then(_ => {
         this.http.get(this.host + url + '?ts=' + ts + '&apikey=' + this.publicKey + '&hash=' + this.getHash(ts) + parameters).subscribe((response) => {
@@ -43,13 +43,13 @@ export class ServiceService {
 
   private getKeys(){
     return new Promise((ret) => {
-      this.http.get('assets/keys.json').subscribe((keys:any) => {
+      this.http.get('assets/keys.json').subscribe((keys: any) => {
         this.publicKey = keys.public;
         this.privateKey = keys.private;
 
         ret(true);
-      })
-    })
+      });
+    });
   }
 
 }
