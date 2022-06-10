@@ -61,4 +61,14 @@
     text-align: left;
     font-size: 1.4rem;
   }
+
+  .center {
+    position:relative;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    top:90;
+    transform:translateY(-0%);
+    width: 60%;
+}
 }
